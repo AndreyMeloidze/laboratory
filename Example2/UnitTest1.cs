@@ -881,32 +881,36 @@ namespace Lab
         [Test]
         public void Test1()
         {
-            
-            driver.Navigate().GoToUrl("https://demoqa.com/");
+            driver.Navigate().GoToUrl("https://demoqa.com/select-menu");
 
-            
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//h5[text()='Widgets']"))).Click();
-            
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[text()='Select Menu']"))).Click();
-            driver.FindElement(By.Id("withOptGroup")).Click();
+            var js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("document.getElementById('fixedban')?.remove();");
+            js.ExecuteScript("document.querySelector('footer')?.remove();");
+
+            // Select Value → A root option
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("withOptGroup"))).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[text()='A root option']"))).Click();
 
-            driver.FindElement(By.Id("selectOne")).Click();
+            // Select One → Ms.
+            wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("selectOne"))).Click();
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[text()='Ms.']"))).Click();
 
-       
-            var oldStyleSelect = new SelectElement(driver.FindElement(By.Id("oldSelectMenu")));
-            oldStyleSelect.SelectByText("Black");
+            // Old Style Select Menu → Black
+            new SelectElement(driver.FindElement(By.Id("oldSelectMenu"))).SelectByText("Black");
 
-          
-            driver.FindElement(By.XPath("//div[@id='selectMenuContainer']//div[contains(@class,'css-2b097c-container')]")).Click();
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[text()='Black']"))).Click();
-            driver.FindElement(By.XPath("//div[@id='selectMenuContainer']//div[contains(@class,'css-2b097c-container')]")).Click();
-            wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[text()='Red']"))).Click();
+            // Multiselect → Black, Red (корректная версия)
+            var multiInput = wait.Until(ExpectedConditions.ElementIsVisible(
+                By.Id("react-select-4-input")
+            ));
 
-          
-            var multiSelect = new SelectElement(driver.FindElement(By.Id("cars")));
-            multiSelect.SelectByText("Opel");
+            multiInput.SendKeys("Black");
+            multiInput.SendKeys(Keys.Enter);
+
+            multiInput.SendKeys("Red");
+            multiInput.SendKeys(Keys.Enter);
+
+            // Standard multi select → Opel
+            new SelectElement(driver.FindElement(By.Id("cars"))).SelectByText("Opel");
         }
 
         [Test]
