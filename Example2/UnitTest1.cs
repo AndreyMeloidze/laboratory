@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using NUnit.Framework;
 
 namespace Lab
 {
@@ -236,7 +237,7 @@ namespace Lab
                     "return document.getElementById('uploadFile').files[0].name;");
                 Assert.That(uploadedName, Is.EqualTo(fileName), "Имя файла в input.files[0].name не совпало с ожидаемым.");
 
-              
+
             }
             catch (Exception ex)
             {
@@ -566,39 +567,39 @@ namespace Lab
         [Test]
         public void Test2()
         {
- driver.Navigate().GoToUrl("https://demoqa.com/");
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementToBeClickable(By.XPath("//h5[text()='Widgets']"))).Click();
+            driver.Navigate().GoToUrl("https://demoqa.com/");
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementToBeClickable(By.XPath("//h5[text()='Widgets']"))).Click();
 
-    wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementToBeClickable(By.XPath("//span[text()='Accordian']"))).Click();
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementToBeClickable(By.XPath("//span[text()='Accordian']"))).Click();
 
-    // 1 — What is Lorem Ipsum?
-    var item1 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementToBeClickable(By.Id("section1Heading")));
-    item1.Click();
+            // 1 — What is Lorem Ipsum?
+            var item1 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementToBeClickable(By.Id("section1Heading")));
+            item1.Click();
 
-    var content1 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementIsVisible(By.Id("section1Content")));
-    Assert.That(content1.Text.Length, Is.GreaterThan(10));
+            var content1 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementIsVisible(By.Id("section1Content")));
+            Assert.That(content1.Text.Length, Is.GreaterThan(10));
 
-    // 2 — Where does it come from?
-    var item2 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementToBeClickable(By.Id("section2Heading")));
-    item2.Click();
+            // 2 — Where does it come from?
+            var item2 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementToBeClickable(By.Id("section2Heading")));
+            item2.Click();
 
-    var content2 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementIsVisible(By.Id("section2Content")));
-    Assert.That(content2.Text.Length, Is.GreaterThan(10));
+            var content2 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementIsVisible(By.Id("section2Content")));
+            Assert.That(content2.Text.Length, Is.GreaterThan(10));
 
-    // 3 — Why do we use it?
-    var item3 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementToBeClickable(By.Id("section3Heading")));
-    item3.Click();
+            // 3 — Why do we use it?
+            var item3 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementToBeClickable(By.Id("section3Heading")));
+            item3.Click();
 
-    var content3 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-        .ElementIsVisible(By.Id("section3Content")));
-    Assert.That(content3.Text.Length, Is.GreaterThan(10));
+            var content3 = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+                .ElementIsVisible(By.Id("section3Content")));
+            Assert.That(content3.Text.Length, Is.GreaterThan(10));
         }
 
         [Test]
@@ -916,29 +917,29 @@ namespace Lab
         [Test]
         public void Test2()
         {
-            
+
             driver.Navigate().GoToUrl("https://demoqa.com/");
 
-            
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//h5[text()='Interactions']")));
             driver.FindElement(By.XPath("//h5[text()='Interactions']")).Click();
 
-           
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[text()='Sortable']")));
             driver.FindElement(By.XPath("//span[text()='Sortable']")).Click();
 
-           
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("demo-tab-list")));
             driver.FindElement(By.Id("demo-tab-list")).Click();
 
-            
+
             wait.Until(ExpectedConditions.ElementIsVisible(By.CssSelector(".vertical-list-container")));
             Actions actions = new Actions(driver);
 
-           
+
             var listItems = driver.FindElements(By.CssSelector(".vertical-list-container .list-group-item")).ToList();
 
-           
+
             for (int i = listItems.Count - 1; i > 0; i--)
             {
                 IWebElement sourceElement = driver.FindElements(By.CssSelector(".vertical-list-container .list-group-item"))[i];
@@ -960,16 +961,16 @@ namespace Lab
             driver.Navigate().GoToUrl("https://demoqa.com/");
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
-           
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//h5[text()='Interactions']"))).Click();
 
-            
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//span[text()='Selectable']"))).Click();
 
-           
+
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id("demo-tab-grid"))).Click();
 
-           
+
             var allCells = wait.Until(d => d.FindElements(By.CssSelector("#gridContainer .list-group-item")));
             foreach (var cell in allCells)
             {
@@ -979,7 +980,7 @@ namespace Lab
 
             Thread.Sleep(500);
 
-           
+
             foreach (var cell in allCells)
             {
                 wait.Until(ExpectedConditions.ElementToBeClickable(cell)).Click();
@@ -987,7 +988,7 @@ namespace Lab
 
             Thread.Sleep(500);
 
-         
+
             var five = wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//li[text()='Five']")));
             five.Click();
 
@@ -1017,7 +1018,7 @@ namespace Lab
             driver.Manage().Cookies.DeleteAllCookies();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        
+
         }
 
 
@@ -1031,7 +1032,7 @@ namespace Lab
 
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
-           
+
             var bookStore = wait.Until(d =>
             {
                 var el = d.FindElement(By.XPath("//h5[text()='Book Store Application']"));
@@ -1040,7 +1041,7 @@ namespace Lab
             ScrollToElement(bookStore);
             bookStore.Click();
 
-          
+
             var login = wait.Until(d =>
             {
                 var el = d.FindElement(By.XPath("//span[text()='Login']"));
@@ -1060,7 +1061,7 @@ namespace Lab
             });
             Assert.That(error1.Text, Is.EqualTo("Invalid username or password!"));
 
-           
+
             var newUser = wait.Until(d =>
             {
                 var el = d.FindElement(By.Id("newUser"));
@@ -1074,10 +1075,10 @@ namespace Lab
             driver.FindElement(By.Id("userName")).SendKeys("TestUser2");
             driver.FindElement(By.Id("password")).SendKeys("1");
 
-           
+
             driver.FindElement(By.Id("register")).Click();
 
-           
+
             var error2 = wait.Until(d =>
             {
                 var el = d.FindElement(By.Id("name"));
@@ -1085,7 +1086,7 @@ namespace Lab
             });
             Assert.That(error2.Text, Is.EqualTo("Please verify reCaptcha to register!"));
 
-            
+
             wait.Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.XPath("//iframe[contains(@title, 'reCAPTCHA')]")));
             var captchaCheckbox = wait.Until(d =>
             {
@@ -1111,7 +1112,7 @@ namespace Lab
             modalOk.Click();
         }
 
-      
+
         public void ScrollToElement(IWebElement element)
         {
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
@@ -1125,4 +1126,5 @@ namespace Lab
             driver = null;
         }
     }
+
 }
